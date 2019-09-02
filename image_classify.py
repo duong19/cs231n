@@ -70,7 +70,7 @@ class K_nearest_neighbor:
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
         dist = np.zeros((num_test, num_train))
-        for i in xrange(num_test):
+        for i in range(num_test):
             dist[i,:]=np.sqrt(np.sum((X[i]-self.X_train)**2,axis=1))
         return dist
     def predict(self, X, k =1):
@@ -79,12 +79,12 @@ class K_nearest_neighbor:
     def predict_labels(self, dist, k=1):
         num_test = dist.shape[0]
         y_pred = np.zeros(num_test)
-        for i in xrange(num_test):
-            top_k_index = np.argsort(dist[i])[:k]
-            closest_y = self.y_train[top_k_index]
-        vote = Counter(closest_y)
-        count = vote.most_common()
-        y_pred[i] = count[0][0]
+        for i in range(num_test):
+			top_k_index = np.argsort(dist[i])[:k]
+			closest_y = self.y_train[top_k_index]
+			vote = Counter(closest_y)
+			count = vote.most_common()
+			y_pred[i] = count[0][0]
         return y_pred
 
 classifier = K_nearest_neighbor()
